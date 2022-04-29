@@ -1,0 +1,50 @@
+body {
+    margin: 0px;
+}
+
+#master {
+    font-family: 'Roboto', sans-serif;
+}
+
+#master::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 600px;
+    right: 0px;
+    background-size: cover;
+    background-image: url(https://static-gcdn.basecdn.net/account/image/background.png);
+    background-repeat: repeat-x;
+    background-position: right bottom;
+}
+
+#master #page {
+    width: 600px;
+    height: 100%;
+}
+
+#master #page .auth .box-wrap {
+    box-sizing: border-box;
+    max-width: 550px;
+    margin: auto;
+    padding: 20px;
+}
+
+#master #page .auth .box-wrap .logo-base {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.row #submit{
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #2bd14e;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+}

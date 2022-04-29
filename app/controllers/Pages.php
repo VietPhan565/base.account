@@ -5,15 +5,31 @@ class Pages extends Controller{
         $this->user_model = $this->model('User');
     }
 
-    public function index(){
-        $users = $this->user_model->getUsers();
-        $data = [
-            'users' => $users
-        ];
-        $this->view('pages/index', $data);
-    }
+	public function index(){
+		$data = [
+			'title' => 'Home page'
+		];
 
-    public function about(){
-        $this->view('pages/about');
-    }
+		$this->view('index', $data);
+	}
+
+    public function login(){
+		$data = [
+			'username_error' => '',
+			'password_error' => ''
+		];
+		$this->view('pages/login', $data);
+	}
+
+	public function register(){
+		$this->view('pages/register');
+	}
+
+	public function forgot_password(){
+		$this->view('pages/forgot.password');
+	}
+
+	public function change_password(){
+		$this->view('pages/change.password');
+	}
 }

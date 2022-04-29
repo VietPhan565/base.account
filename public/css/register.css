@@ -1,0 +1,101 @@
+#master #page .auth .box-wrap .form-register h1 {
+    margin: 0px;
+    padding-top: 35px;
+    padding-bottom: 8px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#master #page .auth .box-wrap .form-register .sub-title {
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+
+#master #page .auth .box-wrap .form-register .form {
+    padding: 30px 0px;
+}
+
+#master #page .auth .box-wrap .form-register .form .label {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#master #page .auth .box-wrap .form-register .form .input input {
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+}
+
+#master #page .auth .box-wrap .form-register .form .row {
+    padding-bottom: 20px;
+}
+
+.relative{
+    position: relative;
+}
+
+.oauth {
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.oauth .label::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    height: 1px;
+    left: 0;
+    right: 0;
+    background-color: #eee;
+}
+
+.oauth .label {
+    position: relative;
+    text-align: center;
+}
+
+.oauth .label span {
+    position: relative;
+    background-color: #ffffff;
+    color: #aaa;
+}
+
+.oauth-login{
+    text-decoration: none;
+    color: #236CDE;
+    border: 2px solid #eee;
+    padding: 10px 20px 10px 20px;
+    background-color: #F3F3F3;
+    margin: 10px 20px 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right
+}
+
+.login .sign-in{
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.login .sign-in .logging-in{
+    text-decoration: none;
+    color: #236CDE;
+    font-size: 15px;
+}

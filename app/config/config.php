@@ -10,7 +10,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT
-    define('URLROOT', 'localhost/base.account');
+    define('URLROOT', 'http://localhost/base.account');
 
-    define('SITENAME', 'Base');
+    define('SITENAME', 'Base Account');
 ?>

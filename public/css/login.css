@@ -1,0 +1,144 @@
+#master #page .auth .box-wrap .form-login {
+    font-family: 'Roboto', sans-serif;
+}
+
+#master #page .auth .box-wrap .form-login h1 {
+    margin: 0px;
+    padding-top: 35px;
+    padding-bottom: 8px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#master #page .auth .box-wrap .form-login .sub-title {
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+#master #page .auth .box-wrap .form-login .form {
+    padding: 30px 0px;
+}
+
+#master #page .auth .box-wrap .form-login .form .label {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#master #page .auth .box-wrap .form-login .form .input input {
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+}
+
+#master #page .auth .box-wrap .form-login .form .row {
+    padding-bottom: 20px;
+}
+
+.relative{
+    position: relative;
+}
+
+#master #page .auth .box-wrap .form-login .form .label .forgot-pass {
+    cursor: pointer;
+    color: #267CDE;
+    font-weight: normal;
+    float: right;
+    font-size: 13px;
+}
+
+#master #page .auth .box-wrap .form-login .form .row .checkbox {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: gray;
+}
+
+.row .err{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: red;
+}
+
+.oauth {
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.oauth .label::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    height: 1px;
+    left: 0;
+    right: 0;
+    background-color: #eee;
+}
+
+.oauth .label {
+    position: relative;
+    text-align: center;
+}
+
+.oauth .label span {
+    position: relative;
+    background-color: #ffffff;
+    color: #aaa;
+}
+
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.oauth .oauth-login.left {
+    margin-right: 2%;
+}
+
+.oauth .oauth-login {
+    background-color: #f3f3f3;
+    border: 1px solid #eee;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    box-sizing: border-box;
+    width: 32%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 10px;
+}
+
+.oauth a {
+    text-decoration: none;
+    color: #267CDE;
+}
+
+.sign-up{
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+    text-align: center;
+}
+
+.sign-up a{
+    text-decoration: none;
+    color: #267CDE;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
