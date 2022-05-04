@@ -15,16 +15,28 @@ class User
         return $result;
     }
 
-    public function getAccountId($username){
-        $this->db->query("SELECT * FROM account WHERE username = '" . $username . "'");
-        $result = $this->db->single();
-        return $result;
+
+    public function findUserByEmail($email)
+    {
+        $this->db->query('SELECT * FROM user where email = :email');
+        $this->db->bind(':email', $email);
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public function getUserByAccountId($id)
+    public function register($data, $id)
     {
-        $this->db->query('SELECT * FROM user WHERE account_id = ' . $id);
-        $data = $this->db->single();
-        return $data;
+        $this->db->query('INSERT INTO user(email, account_id) VALUES (:email, :acc_id)');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':acc_id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

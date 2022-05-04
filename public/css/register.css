@@ -99,3 +99,8 @@
     color: #236CDE;
     font-size: 15px;
 }
+.err{
+    padding: 10px 0px 0px 3px;
+    color: red;
+    font-size: 14px;
+}

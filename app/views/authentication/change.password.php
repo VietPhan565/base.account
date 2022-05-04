@@ -17,7 +17,7 @@
 							<img src="https://share-gcdn.basecdn.net/brand/logo.full.png" alt="Logo base" />
 						</a>
 					</div>
-					<form class="form-change-pass" action="<?php echo URLROOT; ?>/pages/change_password" method="POST">
+					<form class="form-change-pass" action="<?php echo URLROOT; ?>/authentication/change_password" method="POST">
 						<h1>Account password recovery</h1>
 						<div class="change-password">
 							<div class="row">
@@ -40,7 +40,7 @@
 					</form>
 					<div class="extra">
 						<div class="login">
-							<a href="<?php echo URLROOT; ?>/pages/login">Login now</a> if your company was
+							<a href="<?php echo URLROOT; ?>/authentication/login">Login now</a> if your company was
 							already on <strong>Base Account</strong>
 						</div>
 					</div>

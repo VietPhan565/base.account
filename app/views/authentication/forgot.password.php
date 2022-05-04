@@ -24,7 +24,7 @@
 							sent to your email.
 						</div>
 
-						<form class="forgot-password" action="<?php echo URLROOT; ?>/pages/forgot_password" method="POST">
+						<form class="forgot-password" action="<?php echo URLROOT; ?>/authentication/forgot_password" method="POST">
 							<div class="row">
 								<div class="label">Email*</div>
 								<div class="input">
@@ -44,7 +44,7 @@
 					</div>
 					<div class="extra">
 						<div class="login">
-							<a href="<?php echo URLROOT; ?>/pages/login">Login now</a> if your company was
+							<a href="<?php echo URLROOT; ?>/authentication/login">Login now</a> if your company was
 							already on <strong>Base Account</strong>
 						</div>
 					</div>

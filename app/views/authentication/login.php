@@ -20,7 +20,7 @@
 					<div class="form-login">
 						<h1>Login</h1>
 						<div class="sub-title">Welcome back. Login to start working.</div>
-						<form class="form" action="<?php echo URLROOT; ?>/pages/login" method="POST">
+						<form class="form" action="<?php echo URLROOT; ?>/authentication/login" method="POST">
 							<div class="row">
 								<div class="label">Username</div>
 								<div class="input">
@@ -73,7 +73,7 @@
 					</div>
 					<div class="register">
 						<div class="sign-up">
-							<a class="new-acc" href="<?php echo URLROOT; ?>/pages/register">
+							<a class="new-acc" href="<?php echo URLROOT; ?>/register/register">
 								Don't have an account, <strong>Sign up</strong> to login
 							</a>
 						</div>
@@ -84,7 +84,7 @@
 	</div>
 	<script>
 		function forgotPassword() {
-			window.location = '<?php echo URLROOT; ?>/pages/forgot_password';
+			window.location = '<?php echo URLROOT; ?>/authentication/forgot_password';
 		}
 	</script>
 	<!-- <script src="<?php echo URLROOT; ?>/public/js/login.js>"></script> -->

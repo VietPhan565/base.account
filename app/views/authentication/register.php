@@ -22,11 +22,16 @@
 						<div class="sub-title">
 							Sign up to have permission to access the system
 						</div>
-						<form class="form" action="<?php echo URLROOT; ?>/pages/register" method="POST">
+						<form class="form" action="<?php echo URLROOT; ?>/register/register" method="POST">
 							<div class="row">
 								<div class="label">Username</div>
 								<div class="input">
 									<input type="text" name="username" placeholder="Enter username" />
+								</div>
+								<div class="err">
+									<span class="invalid_res">
+										<?php echo $data['user_error'] ?>
+									</span>
 								</div>
 							</div>
 							<div class="row">
@@ -34,23 +39,32 @@
 								<div class="input">
 									<input type="password" name="password" placeholder="Your password" />
 								</div>
+								<div class="err">
+									<span class="invalid_res">
+										<?php echo $data['pass_error'] ?>
+									</span>
+								</div>
 							</div>
 							<div class="row">
 								<div class="label">Confirm Password</div>
 								<div class="input">
 									<input type="password" name="confirm_pass" placeholder="Your confirm password" />
 								</div>
+								<div class="err">
+									<span class="invalid_res">
+										<?php echo $data['confirm_pass_error'] ?>
+									</span>
+								</div>
 							</div>
 							<div class="row">
 								<div class="label">Email</div>
 								<div class="input">
-									<input type="email" name="email" placeholder="Enter email" />
+									<input type="text" name="email" placeholder="Enter email" />
 								</div>
-							</div>
-							<div class="row">
-								<div class="label">Phone number</div>
-								<div class="input">
-									<input type="tel" name="phone" placeholder="Enter phone number" />
+								<div class="err">
+									<span class="invalid_res">
+										<?php echo $data['email_error'] ?>
+									</span>
 								</div>
 							</div>
 							<div class="row relative">
@@ -69,7 +83,7 @@
 					</div>
 					<div class="login">
 						<div class="sign-in">
-							<a class="logging-in" href="<?php echo URLROOT; ?>/pages/login">
+							<a class="logging-in" href="<?php echo URLROOT; ?>/authentication/login">
 								Already have an account, <strong>Sign in</strong> to access the system
 							</a>
 						</div>
