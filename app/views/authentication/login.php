@@ -24,7 +24,7 @@
 							<div class="row">
 								<div class="label">Username</div>
 								<div class="input">
-									<input type="text" name="username" placeholder="Your username" />
+									<input type="text" name="username" placeholder="Your username" value="<?php echo $data['username']; ?>" />
 								</div>
 								<div class="err">
 									<span class="invalid_res">
@@ -84,7 +84,7 @@
 	</div>
 	<script>
 		function forgotPassword() {
-			window.location = '<?php echo URLROOT; ?>/authentication/forgot_password';
+			window.location = '<?php echo URLROOT; ?>/password/forgot_password';
 		}
 	</script>
 	<!-- <script src="<?php echo URLROOT; ?>/public/js/login.js>"></script> -->

@@ -54,46 +54,18 @@ class Authentication extends Controller
 				if ($logged_in_user != null) {
 					$this->createUserSession($logged_in_user);
 					header('location: ' . URLROOT . '/uaccount/hello');
-					
 				} else {
 					$data['password_error'] = 'Thông tin không đúng, vui lòng nhập lại.';
 					$this->view('authentication/login', $data);
 				}
 			}
-		} else {
-			$data = [
-				'username' => '',
-				'password' => '',
-				'username_error' => '',
-				'password_error' => ''
-			];
 		}
 
 		$this->view('authentication/login', $data);
 	}
 
-
-	/**
-	 * forgot_password
-	 *
-	 * @return void
-	 */
-	public function forgot_password()
+	public function createUserSession($account)
 	{
-		$this->view('authentication/forgot.password');
-	}
-
-	/**
-	 * change_password
-	 *
-	 * @return void
-	 */
-	public function change_password()
-	{
-		$this->view('authentication/change.password');
-	}
-
-	public function createUserSession($account){
 		session_start();
 		$_SESSION['account_id'] = $account->account_id;
 		$_SESSION['username'] = $account->username;

@@ -24,11 +24,16 @@
 							sent to your email.
 						</div>
 
-						<form class="forgot-password" action="<?php echo URLROOT; ?>/authentication/forgot_password" method="POST">
+						<form class="forgot-password" action="<?php echo URLROOT; ?>/password/forgot_password" method="POST">
 							<div class="row">
 								<div class="label">Email*</div>
 								<div class="input">
-									<input type="email" name="email" placeholder="Your email" required />
+									<input type="email" name="email" placeholder="Your email" />
+								</div>
+								<div class="err">
+									<span class="input_err">
+										<?php echo $data['email_error']; ?>
+									</span>
 								</div>
 							</div>
 							<div class="row relative">
