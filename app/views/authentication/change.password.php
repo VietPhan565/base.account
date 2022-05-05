@@ -17,8 +17,8 @@
 							<img src="https://share-gcdn.basecdn.net/brand/logo.full.png" alt="Logo base" />
 						</a>
 					</div>
-					<form class="form-change-pass" action="<?php echo URLROOT; ?>/authentication/change_password" method="POST">
-						<h1>Account password recovery</h1>
+					<form class="form-change-pass" action="<?php echo URLROOT; ?>/password/change_password" method="POST">
+						<h1>Account password recovery <?php echo $data['email']; ?></h1>
 						<div class="change-password">
 							<div class="row">
 								<div class="label">New password</div>

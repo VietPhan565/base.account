@@ -16,4 +16,5 @@
     define('URLROOT', 'http://localhost/base.account');
 
     define('SITENAME', 'Base Account');
+
 ?>
