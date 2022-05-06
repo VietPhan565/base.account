@@ -13,7 +13,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT
-    define('URLROOT', 'http://localhost/base.account');
+    define('URLROOT', 'http://base-trainee.com/base.account');
 
     define('SITENAME', 'Base Account');
 

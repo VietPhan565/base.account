@@ -45,4 +45,15 @@ class Account
 			return false;
 		}
 	}
+
+	public function checkUserExist($user){
+		$this->db->query('SELECT * FROM `account` WHERE username = :user');
+		$this->db->bind(':user', $user);
+
+		if($this->db->rowCount()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

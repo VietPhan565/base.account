@@ -59,13 +59,12 @@ class Password extends Controller
 					$mail->isHTML();
 					$mail->Subject = "Đổi mật khẩu";
 					$mail->setFrom('vietpthe150767@fpt.edu.vn');
-					$mail->Body = 'Click vào link này để thay đổi mật khẩu của bạn: <a href="http://localhost/base.account/password/change_password">Đổi mật khẩu</a>
+					$mail->Body = 'Click vào link này để thay đổi mật khẩu của bạn: <a href="' . URLROOT .'/password/change_password">Đổi mật khẩu</a>
 					';
 
 					$mail->addAddress($data['email']);
 					$mail->send();
 					$mail->smtpClose();
-					echo "Success";
 				} catch (Exception $e) {
 					echo $e->getMessage();
 				}

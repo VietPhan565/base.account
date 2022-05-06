@@ -11,7 +11,7 @@ class Role
 
     public function getRole()
     {
-        $this->db->query("SELECT * FROM role_account");
+        $this->db->query("SELECT * FROM role");
         $result = $this->db->resultSet();
         return $result;
     }

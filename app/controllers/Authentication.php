@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Authentication extends Controller
 {
 	public function __construct()
@@ -31,7 +32,7 @@ class Authentication extends Controller
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+			$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 			$data = [
 				'username' => trim($_POST['username']),
@@ -43,6 +44,8 @@ class Authentication extends Controller
 			//Validate username 
 			if (empty($data['username'])) {
 				$data['username_error'] = 'Tài khoản không được để trống';
+			} elseif(!$this->account_model->checkUserExist($data['username'])){
+				$data['username_error'] = 'Tài khoản không tồn tại';
 			}
 
 			if (empty($data['password'])) {
@@ -53,7 +56,7 @@ class Authentication extends Controller
 				$logged_in_user = $this->account_model->logIn($data['username'], $data['password']);
 				if ($logged_in_user != null) {
 					$this->createUserSession($logged_in_user);
-					header('location: ' . URLROOT . '/uaccount/hello');
+					header('location: ' . URLROOT . '/information/userinfo');
 				} else {
 					$data['password_error'] = 'Thông tin không đúng, vui lòng nhập lại.';
 					$this->view('authentication/login', $data);
@@ -64,10 +67,16 @@ class Authentication extends Controller
 		$this->view('authentication/login', $data);
 	}
 
+	public function logout(){
+		session_destroy();
+		header('location: ' . URLROOT . '/authentication/login');
+	}
+
 	public function createUserSession($account)
 	{
 		session_start();
 		$_SESSION['account_id'] = $account->account_id;
 		$_SESSION['username'] = $account->username;
 	}
+
 }

@@ -15,6 +15,12 @@ class User
         return $result;
     }
 
+    public function findUserById($id){
+        $this->db->query('SELECT * FROM user WHERE account_id = :id');
+        $this->db->bind(':id', $id);
+        $data = $this->db->single();
+        return $data;
+    }
 
     public function findUserByEmail($email)
     {

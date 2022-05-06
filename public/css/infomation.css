@@ -1,0 +1,354 @@
+html, body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+body{
+    display: block;
+}
+
+#base-panel{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #302725;
+    height: 100%;
+    width: 90px;
+    z-index: 10000;
+}
+
+#base-panel .items{
+    position: relative;
+}
+
+#base-panel .item{
+    text-align: center;
+    padding: 5px 0px;
+    cursor: pointer;
+    position: relative;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#base-panel .item.active{
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#base-panel .image{
+    height: 51px;
+}
+
+#base-panel .image .inner{
+    width: 32px;
+    height: 32px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#base-panel .image .inner img{
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    display: block;
+    background-color: #fff;
+}
+
+#base-panel .item .icon{
+    padding: 8px 0px;
+    margin-bottom: 3px;
+}
+
+#base-panel .item .info{
+    padding: 0px 5px 12px;
+    font-size: 14px;
+}
+
+#base-panel .footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#document{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100%;
+    z-index: 100;
+}
+
+#master{
+    position: absolute;
+    top: 0px;
+    left: 90px;
+    right: 0px;
+    bottom: 0px;
+    padding: 0px;
+}
+
+#pagew{
+    position: absolute;
+    overflow: auto;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+#page{
+    position: relative;
+    min-height: 100%;
+}
+
+#menu{
+    position: absolute;
+    width: 270px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f6f6f6;
+}
+
+#menu .list .top{
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+}
+
+#menu .top .name{
+    font-size: 24px;
+    color: #000;
+    font-weight: 300;
+}
+
+#menu .top .info{
+    font-size: 14px;
+    padding-top: 5px;
+    font-weight: normal;
+}
+
+#menu .title{
+    padding: 20px 20px 15px 20px;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #999;
+    border-top: 1px solid #eee;
+}
+
+#menu .box{
+    padding-bottom: 20px;
+}
+
+#menu .li{
+    position: relative;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    padding: 10px 10px 10px 48px;
+    margin: 5px 0px;
+}
+
+#menu .li.active{
+    color: #d85743;
+    font-weight: bold;
+}
+
+#menu .li .icon{
+    position: absolute;
+    top: 9px;
+    left: 20px;
+    overflow: hidden;
+    font-weight: normal;
+}
+
+#menu .li .icon .material-symbols-outlined{
+    font-size: 20px;
+}
+
+#menu .li .icon
+
+#menu .li > .text{
+    margin-right: 50px;
+    font-size: 13px;
+}
+
+#page-main{
+    margin-right: 270px;
+    position: relative;
+    min-height: 1300px;
+}
+
+#page-main .apptitle{
+    position: relative;
+    margin: 0 20px;
+    height: 74px;
+    border-bottom: 2px solid #eee;
+}
+
+#page-main .apptitle .cta{
+    position: absolute;
+    font-size: 15px;
+    top: 18px;
+    right: 0px;
+    padding: 9px 15px;
+    background-color: #c95353;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#page-main .apptitle .cta::before{
+    font-family: "Material Icons";
+    content: "\e5d8";
+    color: #fff;
+    padding: 0 10px 0 0;
+}
+
+#page-main .apptitle .back{
+    padding-top: 18px;
+    padding-left: 40px;
+    display: inline-block;
+    max-width: 50%;
+}
+
+#page-main .apptitle .back::before{
+    position: absolute;
+    font-family: "Material Icons";
+    content: "\e5c4";
+    color: #aaa;
+    left: 0px;
+    top: 25px;
+    font-size: 25px;
+}
+
+#page-main .back .label{
+    text-transform: uppercase;
+    color: #ccc;
+    font-size: 11px;
+    font-weight: normal;
+    padding-bottom: 5px;
+}
+
+#page-main .back .title{
+    font-size: 18px;
+    font-weight: 300;
+    color: #222;
+}
+
+#profile{
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+#profile .main{
+    position: relative;
+    padding-left: 120px;
+    padding-bottom: 30px;
+}
+#profile .main .image{
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+#profile .main .image img{
+    width: 100px;
+    height: 100px;
+}
+
+#profile .main .title{
+    font-size: 26px;
+    font-weight: normal;
+    color: #111;
+}
+
+#profile .main .subtitle{
+    font-size: 16px;
+    font-weight: 300;
+    color: #aaa;
+    padding: 8px 0;
+}
+
+#profile .main .info{
+    padding-top: 10px;
+    font-size: 14px;
+    position: relative;
+    padding-left: 140px;
+}
+
+#profile .main .info b{
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    font-weight: 500;
+    color: #666;
+    width: 110px;
+    display: inline-block;
+}
+
+#profile .list{
+    padding: 40px 0px 20px;
+}
+
+#profile .list .title{
+    padding: 15px 0px;
+    font-size: 13px;
+    color: #aaa;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 1px solid #ddd;
+}
+
+#profile .list .contact-info{
+    position: relative;
+    padding: 15px 0px 15px 160px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+#profile .list .contact-info b{
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    width: 160px;
+    color: #888;
+    font-weight: 500;
+}
+
+#profile .list .item-none{
+    font-size: 14px;
+    font-weight: 300px;
+    text-align: center;
+    color: #888;
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin-top: 25px;
+}
+#profile .list .title .add{
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    text-align: center;
+    font-size: 20px;
+    padding: 6px;
+    cursor: pointer;
+}
+#profile .list .title .add .icon::before{
+    font-family: "Material Icons";
+    content: "\f23a";
+}

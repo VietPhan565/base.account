@@ -54,10 +54,10 @@
 							</div>
 							<div class="row relative">
 								<div class="checkbox">
-									<input type="checkbox" name="checkbox" />&nbsp;Keep me
+									<input type="checkbox" name="checkbox" value="1"/>&nbsp;Keep me
 									logged in
 								</div>
-								<button id="submit" type="submit" value="submit">Login to start working</button>
+								<button id="submit" name="submit" type="submit" value="submit">Login to start working</button>
 								<div class="oauth">
 									<div class="label">
 										<span>Or, login via single sign-on</span>
