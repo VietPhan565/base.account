@@ -2,7 +2,7 @@
 class Core
 {
     protected $current_controller = 'Authentication';
-    protected $current_method = 'index';
+    protected $current_method = 'login';
     protected $params = [];
 
     public function __construct()
