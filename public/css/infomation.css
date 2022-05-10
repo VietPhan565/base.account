@@ -1,4 +1,5 @@
-html, body{
+html,
+body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     position: relative;
@@ -6,25 +7,25 @@ html, body{
     height: 100%;
 }
 
-body{
+body {
     display: block;
 }
 
-#base-panel{
+#base-panel {
     position: absolute;
     top: 0px;
     left: 0px;
     background-color: #302725;
     height: 100%;
     width: 90px;
-    z-index: 10000;
+    z-index: 9000;
 }
 
-#base-panel .items{
+#base-panel .items {
     position: relative;
 }
 
-#base-panel .item{
+#base-panel .item {
     text-align: center;
     padding: 5px 0px;
     cursor: pointer;
@@ -32,23 +33,23 @@ body{
     color: rgba(255, 255, 255, 0.3);
 }
 
-#base-panel .item.active{
+#base-panel .item.active {
     color: #fff;
     background: rgba(0, 0, 0, 0.2);
 }
 
-#base-panel .image{
+#base-panel .image {
     height: 51px;
 }
 
-#base-panel .image .inner{
+#base-panel .image .inner {
     width: 32px;
     height: 32px;
     margin: auto;
     margin-top: 10px;
 }
 
-#base-panel .image .inner img{
+#base-panel .image .inner img {
     width: 32px;
     height: 32px;
     border-radius: 16px;
@@ -56,24 +57,28 @@ body{
     background-color: #fff;
 }
 
-#base-panel .item .icon{
+#base-panel .item .icon {
     padding: 8px 0px;
     margin-bottom: 3px;
 }
 
-#base-panel .item .info{
+#base-panel .item:hover .icon {
+    color: #fff;
+}
+
+#base-panel .item .info {
     padding: 0px 5px 12px;
     font-size: 14px;
 }
 
-#base-panel .footer{
+#base-panel .footer {
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
 }
 
-#document{
+#document {
     position: relative;
     top: 0px;
     left: 0px;
@@ -82,7 +87,7 @@ body{
     z-index: 100;
 }
 
-#master{
+#master {
     position: absolute;
     top: 0px;
     left: 90px;
@@ -91,7 +96,7 @@ body{
     padding: 0px;
 }
 
-#pagew{
+#pagew {
     position: absolute;
     overflow: auto;
     top: 0px;
@@ -100,12 +105,12 @@ body{
     bottom: 0px;
 }
 
-#page{
+#page {
     position: relative;
     min-height: 100%;
 }
 
-#menu{
+#menu {
     position: absolute;
     width: 270px;
     top: 0px;
@@ -116,25 +121,25 @@ body{
     background-color: #f6f6f6;
 }
 
-#menu .list .top{
+#menu .list .top {
     padding: 12px 15px;
     border-bottom: 1px solid #eee;
     box-sizing: border-box;
 }
 
-#menu .top .name{
+#menu .top .name {
     font-size: 24px;
     color: #000;
     font-weight: 300;
 }
 
-#menu .top .info{
+#menu .top .info {
     font-size: 14px;
     padding-top: 5px;
     font-weight: normal;
 }
 
-#menu .title{
+#menu .title {
     padding: 20px 20px 15px 20px;
     font-weight: 300;
     font-size: 14px;
@@ -143,11 +148,11 @@ body{
     border-top: 1px solid #eee;
 }
 
-#menu .box{
+#menu .box {
     padding-bottom: 20px;
 }
 
-#menu .li{
+#menu .li {
     position: relative;
     cursor: pointer;
     font-size: 14px;
@@ -156,12 +161,16 @@ body{
     margin: 5px 0px;
 }
 
-#menu .li.active{
+#menu .li:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#menu .li.active {
     color: #d85743;
     font-weight: bold;
 }
 
-#menu .li .icon{
+#menu .li .icon {
     position: absolute;
     top: 9px;
     left: 20px;
@@ -169,31 +178,29 @@ body{
     font-weight: normal;
 }
 
-#menu .li .icon .material-symbols-outlined{
+#menu .li .icon .material-symbols-outlined {
     font-size: 20px;
 }
 
-#menu .li .icon
-
-#menu .li > .text{
+#menu .li .icon #menu .li>.text {
     margin-right: 50px;
     font-size: 13px;
 }
 
-#page-main{
+#page-main {
     margin-right: 270px;
     position: relative;
     min-height: 1300px;
 }
 
-#page-main .apptitle{
+#page-main .apptitle {
     position: relative;
     margin: 0 20px;
     height: 74px;
     border-bottom: 2px solid #eee;
 }
 
-#page-main .apptitle .cta{
+#page-main .apptitle .cta {
     position: absolute;
     font-size: 15px;
     top: 18px;
@@ -203,23 +210,24 @@ body{
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
-#page-main .apptitle .cta::before{
+#page-main .apptitle .cta::before {
     font-family: "Material Icons";
     content: "\e5d8";
     color: #fff;
     padding: 0 10px 0 0;
 }
 
-#page-main .apptitle .back{
+#page-main .apptitle .back {
     padding-top: 18px;
     padding-left: 40px;
     display: inline-block;
     max-width: 50%;
 }
 
-#page-main .apptitle .back::before{
+#page-main .apptitle .back::before {
     position: absolute;
     font-family: "Material Icons";
     content: "\e5c4";
@@ -229,7 +237,7 @@ body{
     font-size: 25px;
 }
 
-#page-main .back .label{
+#page-main .back .label {
     text-transform: uppercase;
     color: #ccc;
     font-size: 11px;
@@ -237,24 +245,25 @@ body{
     padding-bottom: 5px;
 }
 
-#page-main .back .title{
+#page-main .back .title {
     font-size: 18px;
     font-weight: 300;
     color: #222;
 }
 
-#profile{
+#profile {
     max-width: 700px;
     margin: auto;
     padding: 20px;
 }
 
-#profile .main{
+#profile .main {
     position: relative;
     padding-left: 120px;
     padding-bottom: 30px;
 }
-#profile .main .image{
+
+#profile .main .image {
     display: block;
     position: absolute;
     top: 10px;
@@ -265,32 +274,32 @@ body{
     border-radius: 50px;
 }
 
-#profile .main .image img{
+#profile .main .image img {
     width: 100px;
     height: 100px;
 }
 
-#profile .main .title{
+#profile .main .title {
     font-size: 26px;
     font-weight: normal;
     color: #111;
 }
 
-#profile .main .subtitle{
+#profile .main .subtitle {
     font-size: 16px;
     font-weight: 300;
     color: #aaa;
     padding: 8px 0;
 }
 
-#profile .main .info{
+#profile .main .info {
     padding-top: 10px;
     font-size: 14px;
     position: relative;
     padding-left: 140px;
 }
 
-#profile .main .info b{
+#profile .main .info b {
     position: absolute;
     top: 10px;
     left: 0px;
@@ -300,11 +309,11 @@ body{
     display: inline-block;
 }
 
-#profile .list{
+#profile .list {
     padding: 40px 0px 20px;
 }
 
-#profile .list .title{
+#profile .list .title {
     padding: 15px 0px;
     font-size: 13px;
     color: #aaa;
@@ -314,14 +323,14 @@ body{
     border-bottom: 1px solid #ddd;
 }
 
-#profile .list .contact-info{
+#profile .list .contact-info {
     position: relative;
     padding: 15px 0px 15px 160px;
     border-bottom: 1px solid #ddd;
     font-size: 14px;
 }
 
-#profile .list .contact-info b{
+#profile .list .contact-info b {
     position: absolute;
     top: 15px;
     left: 0px;
@@ -330,7 +339,7 @@ body{
     font-weight: 500;
 }
 
-#profile .list .item-none{
+#profile .list .item-none {
     font-size: 14px;
     font-weight: 300px;
     text-align: center;
@@ -339,7 +348,8 @@ body{
     padding: 20px;
     margin-top: 25px;
 }
-#profile .list .title .add{
+
+#profile .list .title .add {
     position: absolute;
     right: 0px;
     top: 6px;
@@ -348,7 +358,363 @@ body{
     padding: 6px;
     cursor: pointer;
 }
-#profile .list .title .add .icon::before{
+
+#profile .list .title .add .icon::before {
     font-family: "Material Icons";
     content: "\f23a";
+}
+
+
+#dialog {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    z-index: 9999;
+}
+
+#dialog .info-dialog {
+    position: absolute;
+    box-sizing: border-box;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.fdialogwrapper {
+    height: 100%;
+    position: relative;
+}
+
+.scroll-y {
+    overflow-y: auto !important;
+}
+
+.fdialogwrapper .dialogwrapper {
+    position: absolute;
+    padding-bottom: 10px;
+}
+
+.fdialogwrapper .dialogwrapper-inner {
+    margin: auto;
+}
+
+.fdialogwrapper .dialogmain {
+    float: left;
+    position: relative;
+    min-height: 90px;
+    min-width: 450px;
+    max-width: 900px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.fdialogwrapper .dialogtitle {
+    color: #555;
+    padding: 15px 18px;
+    position: relative;
+    font-weight: normal;
+    text-align: center;
+    background-color: #eee;
+    border-radius: 3px 3px 0 0;
+}
+
+#dialog .title {
+    float: left;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    max-width: 500px;
+}
+
+.relative {
+    position: relative;
+}
+
+.dialogclose {
+    position: absolute;
+    cursor: pointer;
+    color: #aaa;
+    right: 10px;
+    top: 10px;
+    padding: 4px 5px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+.dialogclose .icon-close::before {
+    font-family: 'Material Icons';
+    content: '\e5cd';
+}
+
+.dialogcontent {
+    min-height: 40px;
+    border-top: 1px solid transparent;
+    padding: 30px 20px;
+}
+
+.fdialogwrapper .form-buttons {
+    overflow: hidden;
+    padding-top: 20px;
+    border-top: 1px dashed #ddd;
+    margin-top: 5px;
+}
+
+#dialog .clear {
+    clear: both !important;
+}
+
+#dialog .row .label {
+    float: left;
+    font-weight: 500;
+    font-size: 14px;
+    width: 180px;
+    padding: 0;
+}
+
+#dialog .row {
+    padding-bottom: 20px;
+}
+
+#dialog .row .label .sublabel {
+    font-weight: normal;
+    font-size: 12px;
+    color: #999;
+    text-align: justify;
+    padding-top: 2px;
+}
+
+#dialog .row>.data {
+    margin-left: 200px;
+    margin-bottom: 5px;
+}
+
+#dialog .row .input {
+    position: relative;
+}
+
+#dialog .input .gi {
+    float: left;
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+
+#dialog .input .gi:first-child {
+    padding: 0px;
+}
+
+.select-data select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #d3d3d3;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.form-rows .input input {
+    display: block;
+    border: 1px solid #d3d3d3;
+    padding: 6px 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.form-rows .input input:focus {
+    outline: 0;
+    box-shadow: 0px 0px 8px rgba(66, 184, 20, 0.3);
+    border-color: rgba(66, 184, 20, 0.7);
+}
+
+.form-rows .input textarea {
+    display: block;
+    resize: none;
+    border: 1px solid #d3d3d3;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-buttons .button.ok {
+    float: right;
+}
+
+.form-buttons .button.cancel {
+    float: left;
+}
+
+.form-buttons .button {
+    padding: 11px 0px;
+    width: 48%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.button.-success {
+    background-color: #63b814;
+    color: #fff;
+}
+
+.button.button.-secondary {
+    background-color: #ddd;
+    color: #666;
+}
+
+#appdialog {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    font-family: 'Roboto', sans-serif;
+    z-index: 9998;
+}
+
+.dialog-top {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    overflow: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.dialog-error {
+    position: absolute;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0 /50%);
+}
+
+.dialog-inner {
+    margin: auto;
+    overflow: hidden;
+}
+
+.dialog-main {
+    float: left;
+    position: relative;
+    overflow: hidden;
+    min-height: 90px;
+    min-width: 280px;
+    max-width: 900px;
+    border-radius: 3px;
+    background-color: #fff;
+    margin: auto;
+}
+
+.dialog-close {
+    position: absolute;
+    cursor: pointer;
+    color: #999;
+    right: 10px;
+    top: 10px;
+    padding: 6px 7px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+.dialog-close span {
+    font-size: 16px;
+}
+
+.icon-close::before {
+    font-family: "Material Icons";
+    content: "\e5cd";
+}
+
+
+.dialog-content {
+    min-height: 40px;
+    border-top: 1px solid transparent;
+    padding: 10px;
+}
+
+.errdialog {
+    overflow: hidden;
+    padding: 25px 5px;
+    padding-top: 30px;
+    max-width: 500px;
+    min-width: 400px;
+    padding-left: 5px;
+}
+
+.errdialog .icon {
+    vertical-align: middle;
+    width: 60px;
+    padding-left: 15px;
+}
+
+.errdialog table {
+    width: 100%;
+    height: 100%;
+}
+
+#appdialog .errdialog .icon::before {
+    font-family: "Material Icons";
+    content: "\e000";
+    font-size: 48px;
+    color: #c65144;
+    font-weight: normal;
+}
+
+.errdialog .err-message {
+    vertical-align: middle;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: justify;
+    color: #111;
+    line-height: 24px;
+    padding-right: 20px;
+}
+
+.dialog-button {
+    border-top: 2px solid #e7e7e7;
+    text-align: right;
+    position: relative;
+    background-color: #fff;
+}
+
+.dialog-button .button {
+    padding: 13px 0px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.dialog-button .button.confirm-button {
+    float: left;
+    width: 50%;
+}
+
+.dialog-button .button.er {
+    color: #c65144;
+    font-weight: bold;
+    border: none;
+}
+
+.dialog-button .button.ss.confirm-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-left: 1px solid #e7e7e7;
+}
+
+.dialog-button .button.ss{
+    color: #42b814;
+    font-weight: bold;
+    border: none;
 }

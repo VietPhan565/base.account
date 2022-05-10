@@ -13,9 +13,11 @@ class Information extends Controller
     {
         if (isset($_SESSION['username'])) {
             $id = $_SESSION['account_id'];
+            $account = $this->account_model->getAccountByID($id);
             $user = $this->user_model->findUserById($id);
             $data = [
                 'user' => $user,
+                'account' => $account
             ];
             $this->view('authentication/infomation', $data);
         }else{
