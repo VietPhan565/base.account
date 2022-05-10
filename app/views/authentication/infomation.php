@@ -270,7 +270,7 @@
 
 					<div id="page-main">
 						<div class="apptitle" id="appheader">
-							<a href="change_password.html" class="cta url">Chỉnh sửa tài khoản</a>
+							<a href="#" class="cta url">Chỉnh sửa tài khoản</a>
 							<div class="back url">
 								<div class="label">Tài khoản <?php echo $_SESSION['username']; ?></div>
 								<div class="title"><?php echo $user->fullname; ?> . <?php echo $user->position ?></div>

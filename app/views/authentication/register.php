@@ -22,50 +22,50 @@
 						<div class="sub-title">
 							Sign up to have permission to access the system
 						</div>
-						<form class="form" action="<?php echo URLROOT; ?>/register/register" method="POST">
+						<form class="form" method="POST">
 							<div class="row">
 								<div class="label">Username</div>
 								<div class="input">
-									<input type="text" name="username" placeholder="Enter username" />
+									<input type="text" id="username" name="username" placeholder="Enter username" />
 								</div>
-								<div class="err">
+								<!-- <div class="err">
 									<span class="invalid_res">
 										<?php echo $data['user_error'] ?>
 									</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="row">
 								<div class="label">Password</div>
 								<div class="input">
-									<input type="password" name="password" placeholder="Your password" />
+									<input type="password" id="password" name="password" placeholder="Your password" />
 								</div>
-								<div class="err">
+								<!-- <div class="err">
 									<span class="invalid_res">
 										<?php echo $data['pass_error'] ?>
 									</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="row">
 								<div class="label">Confirm Password</div>
 								<div class="input">
-									<input type="password" name="confirm_pass" placeholder="Your confirm password" />
+									<input type="password" id="confirm_pass" name="confirm_pass" placeholder="Your confirm password" />
 								</div>
-								<div class="err">
+								<!-- <div class="err">
 									<span class="invalid_res">
 										<?php echo $data['confirm_pass_error'] ?>
 									</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="row">
 								<div class="label">Email</div>
 								<div class="input">
-									<input type="text" name="email" placeholder="Enter email" />
+									<input type="text" id="email" name="email" placeholder="Enter email" />
 								</div>
-								<div class="err">
+								<!-- <div class="err">
 									<span class="invalid_res">
 										<?php echo $data['email_error'] ?>
 									</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="row relative">
 								<button id="submit" type="submit" value="submit">Register</button>
@@ -92,6 +92,11 @@
 			</div>
 		</div>
 	</div>
+
+	<?php require_once APPROOT . '/views/includes/footer.php'; ?>
+
+	<script type="module" src="<?php echo URLROOT; ?>/public/js/register.js"></script>
+
 </body>
 
 </html>

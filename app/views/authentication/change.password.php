@@ -18,7 +18,7 @@
 						</a>
 					</div>
 					<form class="form-change-pass" action="<?php echo URLROOT; ?>/password/change_password" method="POST">
-						<h1>Account password recovery <?php echo $data['email']; ?></h1>
+						<h1>Account password recovery</h1>
 						<div class="change-password">
 							<div class="row">
 								<div class="label">New password</div>
@@ -48,6 +48,10 @@
 			</div>
 		</div>
 	</div>
+
+	<?php require_once APPROOT . '/views/includes/footer.php'; ?>
+
+	<script src="<?php echo URLROOT; ?>/public/js/login.js"></script>
 </body>
 
 </html>

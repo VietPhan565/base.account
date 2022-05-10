@@ -26,8 +26,10 @@ class User
     {
         $this->db->query('SELECT * FROM user where email = :email');
         $this->db->bind(':email', $email);
-        if ($this->db->rowCount() > 0) {
-            return true;
+
+        $row = $this->db->single();
+        if ($row!=null) {
+            return $row;
         } else {
             return false;
         }
@@ -45,4 +47,5 @@ class User
             return false;
         }
     }
+
 }

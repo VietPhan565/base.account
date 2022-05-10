@@ -13,7 +13,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT
-    define('URLROOT', 'http://base-trainee.com/base.account');
+    define('URLROOT', 'http://'. $_SERVER['HTTP_HOST'] .'/base.account');
 
     define('SITENAME', 'Base Account');
 

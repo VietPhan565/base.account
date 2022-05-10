@@ -13,8 +13,9 @@ class Register extends Controller
      *
      * @return void
      */
-    public function register()
+    public function registration()
     {
+        $response = '';
         $data = [
             'username' => '',
             'password' => '',
@@ -46,7 +47,7 @@ class Register extends Controller
                 $data['user_error'] = 'Tên tài khoản không được để trống.';
             } elseif (!preg_match(name_validation, $data['username'])) {
                 $data['user_error'] = 'Tên tài khoản chỉ có thể chứa kí tự hoặc số.';
-            } elseif ($this->account_model->getAccountByUser($data['username'])!=null){
+            } elseif ($this->account_model->getAccountByUser($data['username']) != null) {
                 $data['user_error'] = 'Tên tài khoản đã tồn tại';
             }
 
@@ -88,14 +89,34 @@ class Register extends Controller
                 if ($this->account_model->register($data)) {
                     $account = $this->account_model->getAccountByUser($data['username']);
                     if (!is_null($account)) {
-                        if ($this->user_model->register($data, $account->account_id)) {
-                            header('location: ' . URLROOT . '/authentication/login');
-                        }
+                        $response = $this->user_model->register($data, $account->account_id);
+                        // header('location: ' . URLROOT . '/authentication/login');
                     }
-                } else {
-                    die('ちょっとマテオ');
                 }
             }
+
+            $output_error = '';
+            $output_success = '';
+
+            if (!empty($data['user_error'])) {
+                $output_error .= $data['user_error'] . '<br/>';
+            }elseif (!empty($data['pass_error'])) {
+                $output_error .= $data['pass_error'] . '<br/>';
+            }elseif (!empty($data['confirm_pass_error'])) {
+                $output_error .= $data['confirm_pass_error'] . '<br/>';
+            }elseif (!empty($data['email_error'])) {
+                $output_error .= $data['email_error'] . '<br/>';
+            }
+
+            if ($response) {
+                $output_success = 'Tạo tài khoản thành công';
+            }
+
+            die(json_encode([
+                'success' => false,
+                'msg' => $output_error,
+                'msg_ok' => $output_success
+            ]));
         }
 
         $this->view('authentication/register', $data);

@@ -42,7 +42,7 @@
     padding-bottom: 20px;
 }
 
-.relative{
+.relative {
     position: relative;
 }
 
@@ -60,7 +60,7 @@
     color: gray;
 }
 
-.row .err{
+.row .err {
     margin-top: 10px;
     margin-left: 10px;
     font-size: 14px;
@@ -125,13 +125,13 @@
     color: #267CDE;
 }
 
-.sign-up{
+.sign-up {
     padding-top: 30px;
     border-top: 2px solid #eee;
     text-align: center;
 }
 
-.sign-up a{
+.sign-up a {
     text-decoration: none;
     color: #267CDE;
     font-family: 'Roboto', sans-serif;
@@ -139,6 +139,28 @@
     font-weight: 300;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 10px;
+}
+
+.toggle-password::before {
+    font-family: "Material Icons";
+    content: "\e8f4";
+}
+
+.toggle-password {
+    float: right;
+    margin-top: -25px;
+    margin-right: 10px;
+}
+
+.toggle-password-invi::before {
+    font-family: "Material Icons";
+    content: "\e8f5";
+}
+
+.toggle-password-invi {
+    float: right;
+    margin-top: -25px;
+    margin-right: 10px;
 }

@@ -57,7 +57,10 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/change_pass.js"></script>
+
+	<?php require_once APPROOT . '/views/includes/footer.php'; ?>
+
+	<script src="<?php echo URLROOT; ?>/public/js/login.js"></script>
 </body>
 
 </html>
