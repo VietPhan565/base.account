@@ -15,6 +15,7 @@
 <body>
 	<?php
 	$user = $data['user'];
+	$account = $data['account'];
 	?>
 	<div id="base-panel">
 		<div class="items">
@@ -83,7 +84,7 @@
 		</div>
 
 		<div class="footer">
-			<div class="item" onclick="LogOut()">
+			<div class="item" id="item-logout">
 				<div class="icon">
 					<span class="material-symbols-outlined">
 						power_settings_new
@@ -105,7 +106,17 @@
 							<div class="list items">
 								<div class="top">
 									<div class="userinfo">
-										<div class="name"><?php echo $user->fullname; ?></div>
+										<?php
+										if (empty($user->fullname)) {
+										?>
+											<div class="name">&nbsp;</div>
+										<?php
+										} else {
+										?>
+											<div class="name"><?php echo $user->fullname; ?></div>
+										<?php
+										}
+										?>
 										<div class="info">@vietphan &nbsp;.&nbsp; <?php echo $user->email; ?></div>
 									</div>
 								</div>
@@ -270,7 +281,7 @@
 
 					<div id="page-main">
 						<div class="apptitle" id="appheader">
-							<a href="#" class="cta url">Chỉnh sửa tài khoản</a>
+							<div id="edit-user-info" class="cta url">Chỉnh sửa tài khoản</div>
 							<div class="back url">
 								<div class="label">Tài khoản <?php echo $_SESSION['username']; ?></div>
 								<div class="title"><?php echo $user->fullname; ?> . <?php echo $user->position ?></div>
@@ -293,17 +304,53 @@
 								</div>
 
 								<div class="text">
-									<div class="title"><?php echo $user->fullname; ?></div>
-									<div class="subtitle"><?php echo $user->position; ?></div>
+									<?php
+									if (empty($user->fullname)) {
+									?>
+										<div class="title">Chưa nhập họ tên</div>
+									<?php
+									} else {
+									?>
+										<div class="title"><?php echo $user->fullname; ?></div>
+									<?php
+									}
+									?>
+									<?php
+									if (empty($user->position)) {
+									?>
+										<div class="subtitle">Chưa nhập chức danh</div>
+									<?php
+									} else {
+									?>
+										<div class="subtitle"><?php echo $user->position; ?></div>
+									<?php
+									}
+									?>
 									<div class="info"><b>Địa chỉ email</b><?php echo $user->email ?></div>
-									<div class="info"><b>Số điện thoại</b><?php echo $user->phone ?></div>
+									<?php
+									if (!empty($user->phone)) {
+									?>
+										<div class="info"><b>Số điện thoại</b><?php echo $user->phone ?></div>
+									<?php
+									} else {
+									?>
+										<div class="info"><b>Số điện thoại</b>Chưa nhập số điện thoại</div>
+									<?php
+									}
+									?>
 									<div class="info" style="display:none;"></div>
 								</div>
 							</div>
-							<div class="list">
-								<div class="title">Thông tin liên hệ</div>
-								<div class="contact-info"><b>Địa chỉ</b><span><?php echo $user->address; ?></span></div>
-							</div>
+							<?php
+							if (!empty($user->address)) {
+							?>
+								<div class="list">
+									<div class="title">Thông tin liên hệ</div>
+									<div class="contact-info"><b>Địa chỉ</b><span><?php echo $user->address; ?></span></div>
+								</div>
+							<?php
+							}
+							?>
 
 							<div class="list">
 								<div class="title">Nhóm (0)</div>
@@ -356,11 +403,216 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		function LogOut() {
-			window.location = '<?php echo URLROOT . '/authentication/logout'; ?>'
-		}
-	</script>
+
+	<div id="dialog" style="width:1937px;display:none">
+		<div class="info-dialog">
+			<div class="fdialogwrapper scroll-y">
+				<div class="dialogwrapper" style="top:10%;left:30%">
+					<div class="dialogwrapper-inner">
+						<div class="dialogmain">
+							<div class="dialogtitle">
+								<div class="title relative">Chỉnh sửa thông tin cá nhân</div>
+								<div class="clear"></div>
+							</div>
+							<div class="dialogclose">
+								<span class="icon-close"></span>
+							</div>
+							<div class="dialogcontent">
+								<div id="edit" class="appdialogedit" style="width:720px;">
+									<form action="" method="post" id="edit-profile">
+										<div class="form-rows">
+											<div class="row">
+												<div class="label">
+													Họ tên của bạn
+													<div class="sublabel">Họ tên của bạn</div>
+												</div>
+												<div class="input data">
+													<input id="fullname" type="text" name="fullname" placeholder="Họ tên của bạn" autocomplete="off" value="<?php echo $user->fullname; ?>">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Email
+													<div class="sublabel">Email của bạn</div>
+												</div>
+												<div class="input data">
+													<input disabled type="text" name="email" placeholder="<?php echo $user->email; ?>">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Username
+													<div class="sublabel">Username của bạn</div>
+												</div>
+												<div class="input data">
+													<input disabled type="text" name="username" placeholder="<?php echo $account->username; ?>">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Vị trí công việc
+													<div class="sublabel">Vị trí công việc</div>
+												</div>
+												<div class="input data">
+													<input id="position" type="text" name="position" placeholder="Vị trí công việc" value="<?php echo $user->position; ?>">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Ảnh đại diện
+													<div class="sublabel">Ảnh đại diện</div>
+												</div>
+												<div class="input data">
+													<input id="avatar" type="file" name="image">
+												</div>
+												<div class="clear"></div>
+											</div>
+											<?php
+											$date = $user->dob;
+											$date = explode('-', $date);
+											$year = $date[0];
+											$month = $date[1];
+											$day = $date[2];
+
+											$date_now = date('Y') - 10;
+											?>
+											<div class="row">
+												<div class="label">
+													Ngày tháng năm sinh
+													<div class="sublabel">Ngày tháng năm sinh</div>
+												</div>
+												<div class="input data">
+													<div class="gi" style="width:33.33%;">
+														<div class="select-data">
+															<select name="dob_day" id="dob_day">
+																<option value="0" <?php echo ($day == 0 ? 'selected' : ''); ?>>-- Chọn ngày --</option>
+																<?php
+																for ($i = 1; $i <= 31; $i++) {
+																?>
+																	<option value="<?php echo $i; ?>" <?php echo ($i == $day ? 'selected' : ''); ?>><?php echo $i ?></option>
+																<?php
+																}
+																?>
+															</select>
+														</div>
+													</div>
+													<div class="gi" style="width:33.33%;">
+														<div class="select-data">
+															<select name="dob_month" id="dob_month">
+																<option value="0" <?php echo ($month == 0 ? 'selected' : ''); ?>>-- Chọn tháng --</option>
+																<?php
+																for ($i = 1; $i <= 12; $i++) {
+																?>
+																	<option value="<?php echo $i; ?>" <?php echo ($i == $month ? 'selected' : ''); ?>><?php echo $i; ?></option>
+																<?php
+																}
+																?>
+															</select>
+														</div>
+													</div>
+
+													<div class="gi" style="width:33.33%;">
+														<div class="select-data">
+															<select name="dob_year" id="dob_year">
+																<option value="0" <?php echo ($year == 0 ? 'selected' : ''); ?>>-- Chọn năm --</option>
+																<?php
+																for ($i = $date_now; $i >= 1930; $i--) {
+																?>
+																	<option value="<?php echo $i; ?>" <?php echo ($i == $year ? 'selected' : ''); ?>><?php echo $i; ?></option>
+																<?php
+																}
+																?>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Số điện thoại
+													<div class="sublabel">Số điện thoại</div>
+												</div>
+												<div class="input data">
+													<input id="phone" type="text" name="phone" placeholder="Số điện thoại" value="<?php echo $user->phone; ?>">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Chỗ ở hiện nay
+													<div class="sublabel">Chỗ ở hiện nay</div>
+												</div>
+												<div class="input data">
+													<textarea name="address" id="address" placeholder="Chỗ ở hiện nay" style="overflow: hidden;overflow-wrap: break-word; height: 50px;"><?php echo $user->address; ?></textarea>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+										<div class="form-buttons">
+											<div class="button ok -success">Cập nhật</div>
+											<div class="button cancel -secondary">Bỏ qua</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="appdialog" style="display:none;">
+		<div class="dialog-top">
+			<div class="dialog-error" style="top: 33%;left: 40%">
+				<div class="dialog-inner">
+					<div class="dialog-main">
+						<div class="dialog-close">
+							<span class="icon-close"></span>
+						</div>
+						<div class="dialog-content">
+							<div id="alert" class="errdialog">
+								<table>
+									<tbody>
+										<tr>
+											<td id="icon-change" class="icon">
+												<span class="icon-help-circle" style="color:#666;"></span>
+											</td>
+											<td class="err-message">
+												Bạn có muốn đăng xuất khỏi hệ thống ngay bây giờ?
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="dialog-button">
+							<div class="button er confirm-button">Close</div>
+							<div class="button ss confirm-button">OK</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="dialog-changepass">
+
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="module" src="<?php echo URLROOT; ?>/public/js/information.js"></script>
 </body>
 
 </html>
