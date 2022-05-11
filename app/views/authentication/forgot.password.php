@@ -30,11 +30,11 @@
 								<div class="input">
 									<input type="email" name="email" placeholder="Your email" />
 								</div>
-								<div class="err">
+								<!-- <div class="err">
 									<span class="input_err">
 										<?php echo $data['email_error']; ?>
 									</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="row relative">
 								<button id="submit" type="submit" value="submit">Recover Password</button>

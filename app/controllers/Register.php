@@ -17,10 +17,12 @@ class Register extends Controller
     {
         $response = '';
         $data = [
+            'fullname' => '',
             'username' => '',
             'password' => '',
             'confirm_pass' => '',
             'email' => '',
+            'fullname_error' => '',
             'user_error' => '',
             'pass_error' => '',
             'confirm_pass_error' => '',
@@ -32,15 +34,22 @@ class Register extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'fullname' => trim($_POST['fullname']),
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
                 'confirm_pass' => trim($_POST['confirm_pass']),
                 'email' => trim($_POST['email']),
+                'fullname_error' => '',
                 'user_error' => '',
                 'pass_error' => '',
                 'confirm_pass_error' => '',
                 'email_error' => ''
             ];
+
+            //Validate fullname
+            if (empty($data['fullname'])) {
+                $data['fullname_error'] = 'Xin vui lòng nhập tên của bạn';
+            }
 
             //Validate username
             if (empty($data['username'])) {
@@ -79,6 +88,7 @@ class Register extends Controller
 
             //Check if all error are empty
             if (
+                empty($data['fullname_error']) &&
                 empty($data['user_error']) && empty($data['pass_error']) &&
                 empty($data['email_error']) && empty($data['confirm_pass_error'])
             ) {
@@ -98,13 +108,15 @@ class Register extends Controller
             $output_error = '';
             $output_success = '';
 
-            if (!empty($data['user_error'])) {
+            if (!empty($data['fullname_error'])) {
+                $output_error .= $data['fullname_error'] . '<br/>';
+            } elseif (!empty($data['user_error'])) {
                 $output_error .= $data['user_error'] . '<br/>';
-            }elseif (!empty($data['pass_error'])) {
+            } elseif (!empty($data['pass_error'])) {
                 $output_error .= $data['pass_error'] . '<br/>';
-            }elseif (!empty($data['confirm_pass_error'])) {
+            } elseif (!empty($data['confirm_pass_error'])) {
                 $output_error .= $data['confirm_pass_error'] . '<br/>';
-            }elseif (!empty($data['email_error'])) {
+            } elseif (!empty($data['email_error'])) {
                 $output_error .= $data['email_error'] . '<br/>';
             }
 

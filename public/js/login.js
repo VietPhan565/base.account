@@ -17,7 +17,7 @@ $(document).ready(function () {
                         $('.err-message').html(data.msg);
                         return;
                     }
-                    window.location = URLROOT + "information/userinfo";
+                    location.href = URLROOT + "information/userinfo";
                 },
             });
         } else {

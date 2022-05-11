@@ -44,6 +44,8 @@ class Authentication extends Controller
 			//Validate username 
 			if (empty($data['username'])) {
 				$data['username_error'] = 'Tài khoản không được để trống';
+			} elseif (!$this->account_model->getAccountByUser($data['username'])) {
+				$data['username_error'] = 'Tài khoản không tồn tại';
 			}
 
 			if (empty($data['password'])) {
@@ -64,13 +66,12 @@ class Authentication extends Controller
 			$response = '';
 			if (!empty($data['username_error'])) {
 				$response .= $data['username_error'] . '<br/>';
-			}
-			if(!empty($data['password_error'])){
+			} elseif (!empty($data['password_error'])) {
 				$response .= $data['password_error'] . '<br/>';
 			}
 			die(json_encode([
 				'success' => false,
-				'msg' => $response
+				'msg' => $response,
 			]));
 		}
 
@@ -79,6 +80,8 @@ class Authentication extends Controller
 
 	public function logout()
 	{
+		unset($_SESSION['account_id']);
+		unset($_SESSION['username']);
 		session_destroy();
 		header('location: ' . URLROOT . '/authentication/login');
 	}

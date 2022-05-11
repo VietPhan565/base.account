@@ -23,6 +23,19 @@
 							Sign up to have permission to access the system
 						</div>
 						<form class="form" method="POST">
+
+							<div class="row">
+								<div class="label">Fullname</div>
+								<div class="input">
+									<input type="text" id="fullname" name="fullname" placeholder="Enter fullname" />
+								</div>
+								<!-- <div class="err">
+									<span class="invalid_res">
+										<?php echo $data['user_error'] ?>
+									</span>
+								</div> -->
+							</div>
+
 							<div class="row">
 								<div class="label">Username</div>
 								<div class="input">

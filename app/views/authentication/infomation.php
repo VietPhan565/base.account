@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tài khoản - <?php echo SITENAME; ?></title>
+	<link rel="shortcut icon" href="https://share-gcdn.basecdn.net/apps/account.png" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:500,400,300,400italic,700,700italic,400italic,300italic&amp;subset=vietnamese,latin" />
 	<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -135,7 +136,7 @@
 										</div>
 									</div>
 
-									<div class="li">
+									<div id="edit-account" class="li">
 										<div class="icon">
 											<span class="material-symbols-outlined">
 												edit
@@ -159,7 +160,7 @@
 										</div>
 									</div>
 
-									<div class="li">
+									<div id="div-changepass" class="li">
 										<div class="icon">
 											<span class="material-symbols-outlined">
 												error
@@ -404,7 +405,7 @@
 		</div>
 	</div>
 
-	<div id="dialog" style="width:1937px;display:none">
+	<div id="dialog" style="width:100%;display:none;">
 		<div class="info-dialog">
 			<div class="fdialogwrapper scroll-y">
 				<div class="dialogwrapper" style="top:10%;left:30%">
@@ -419,7 +420,7 @@
 							</div>
 							<div class="dialogcontent">
 								<div id="edit" class="appdialogedit" style="width:720px;">
-									<form action="" method="post" id="edit-profile">
+									<form id="edit-profile" method="POST" action="" >
 										<div class="form-rows">
 											<div class="row">
 												<div class="label">
@@ -427,7 +428,7 @@
 													<div class="sublabel">Họ tên của bạn</div>
 												</div>
 												<div class="input data">
-													<input id="fullname" type="text" name="fullname" placeholder="Họ tên của bạn" autocomplete="off" value="<?php echo $user->fullname; ?>">
+													<input type="text" name="fullname" placeholder="Họ tên của bạn" autocomplete="off" value="<?php echo $user->fullname; ?>">
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -438,7 +439,7 @@
 													<div class="sublabel">Email của bạn</div>
 												</div>
 												<div class="input data">
-													<input disabled type="text" name="email" placeholder="<?php echo $user->email; ?>">
+													<input id="email" type="text" name="email" placeholder="<?php echo $user->email; ?>" disabled>
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -560,7 +561,7 @@
 											</div>
 										</div>
 										<div class="form-buttons">
-											<div class="button ok -success">Cập nhật</div>
+											<div id="update-user-profile" class="button ok -success">Cập nhật</div>
 											<div class="button cancel -secondary">Bỏ qua</div>
 										</div>
 									</form>
@@ -573,7 +574,7 @@
 		</div>
 	</div>
 
-	<div id="appdialog" style="display:none;">
+	<div id="appdialog">
 		<div class="dialog-top">
 			<div class="dialog-error" style="top: 33%;left: 40%">
 				<div class="dialog-inner">
@@ -607,10 +608,125 @@
 		</div>
 	</div>
 
-	<div id="dialog-changepass">
-
+	<div id="appdialog-error">
+		<div class="dialog-top">
+			<div class="dialog-error" style="top: 33%;left: 40%">
+				<div class="dialog-inner">
+					<div class="dialog-main">
+						<div class="dialog-close">
+							<span class="icon-close"></span>
+						</div>
+						<div class="dialog-content">
+							<div id="alert" class="errdialog">
+								<table>
+									<tbody>
+										<tr>
+											<td id="icon-change" class="icon">
+												<span class="icon-help-circle" style="color:#666;"></span>
+											</td>
+											<td class="err-message">
+												Bạn có muốn đăng xuất khỏi hệ thống ngay bây giờ?
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="dialog-button">
+							<div class="submit">OK</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
+
+	<div id="changepass" style="display: none;">
+		<div class="info-dialog">
+			<div class="fdialogwrapper scroll-y">
+				<div class="dialogwrapper" style="top:10%;left:30%">
+					<div class="dialogwrapper-inner">
+						<div class="dialogmain">
+							<div class="dialogtitle">
+								<div class="title relative">Đổi mật khẩu</div>
+								<div class="clear"></div>
+							</div>
+							<div class="dialogclose">
+								<span class="icon-close"></span>
+							</div>
+							<div class="dialogcontent">
+								<div id="change-pass" class="appdialogedit" style="width:720px;">
+									<form action="" method="post" id="change-password">
+										<div class="form-rows">
+											<div class="row">
+												<div class="label">
+													Mật khẩu hiện tại
+													<div class="sublabel">Mật khẩu hiện tại</div>
+												</div>
+												<div class="input data">
+													<input id="old_password" type="password" name="old_password" placeholder="Mật khẩu hiện tại" autocomplete="off">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Mật khẩu mới
+													<div class="sublabel">Mật khẩu mới</div>
+												</div>
+												<div class="input data">
+													<input id="new_password" type="password" name="new_password" placeholder="Mật khẩu mới" autocomplete="off">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Nhập lại mật khẩu mới
+													<div class="sublabel">Nhập lại mật khẩu mới</div>
+												</div>
+												<div class="input data">
+													<input id="conf_new_password" type="password" name="conf_new_password" placeholder="Nhập lại mật khẩu mới" autocomplete="off">
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row">
+												<div class="label">
+													Force logout
+													<div class="sublabel">Tự động logout từ tất cả thiết bị</div>
+												</div>
+												<div class="input data">
+													<div class="gi" style="width: 100%;">
+														<div class="select-data">
+															<select name="force-logout" id="force-logout">
+																<option value="0">Không</option>
+																<option value="1" selected>Có</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+
+											<div class="row note">
+												Thay đổi mật khẩu có thể bắt buộc yêu cầu bạn phải đăng nhập lại trên tất cả các thiết bị mobiles
+											</div>
+										</div>
+										<div class="form-buttons">
+											<div id="update-new-pass" class="button ok -success">Cập nhật</div>
+											<div class="button cancel -secondary">Bỏ qua</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="module" src="<?php echo URLROOT; ?>/public/js/information.js"></script>
 </body>

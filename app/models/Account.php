@@ -30,7 +30,11 @@ class Account
 		$this->db->bind(':user', $user);
 
 		$data = $this->db->single();
-		return $data;
+		if (!is_null($data)) {
+			return $data;
+		} else {
+			return false;
+		}
 	}
 
 	public function logIn($user, $pass)
@@ -57,9 +61,9 @@ class Account
 		$this->db->bind(':user', $user);
 
 		$row = $this->db->single();
-		if(!is_null($row)){
+		if (!is_null($row)) {
 			return $row;
-		} else{
+		} else {
 			return false;
 		}
 	}
