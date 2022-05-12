@@ -47,7 +47,7 @@
 											<td id="icon-changed" class="icon">
 												<span class="icon-help-circle" style="color:#666;"></span>
 											</td>
-											<td class="err-success">
+											<td class="msg-success">
 												Invalid email
 											</td>
 										</tr>

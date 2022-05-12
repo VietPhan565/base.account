@@ -19,6 +19,7 @@ class Password extends Controller
 		// $this->email = $_SESSION['email'];
 		$this->user_model = $this->model('User');
 		$this->account_model = $this->model('Account');
+		$this->reset_pass_model = $this->model('ResetPassword');
 	}
 
 	/**
@@ -38,7 +39,8 @@ class Password extends Controller
 				'email' => trim($_POST['email']),
 				'email_error' => ''
 			];
-
+			$check = true;
+			$response = '';
 			if (empty($data['email'])) {
 				$data['email_error'] = 'Email không được để trống';
 			} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -48,24 +50,45 @@ class Password extends Controller
 			}
 
 			if (empty($data['email_error'])) {
-				$_SESSION['email'] = $data['email'];
+
+				//Query user from the db
+				$selector = bin2hex(random_bytes(8));
+
+				//Confirm once the db entry has been matched
+				$token = random_bytes(32);
+
+				$url = URLROOT . '/password/change_password?selector=' . $selector . '&validator=' . bin2hex($token);
+
+				$expires = date('U') + 1800;
+				if (!$this->reset_pass_model->deleteResetEmail($data['email'])) {
+					die('Oops, có lỗi gì đó ở đây');
+				}
+
+				$hashed_token = password_hash($token, PASSWORD_DEFAULT);
+
+				if (!$this->reset_pass_model->insertToken($data['email'], $selector, $hashed_token, $expires)) {
+					die('Oops, có lỗi gì đó ở đây');
+				}
+
+				$subject = 'Thay đổi mật khẩu của bạn';
+				$message = '<p>Chúng tôi nhận được yêu cầu thay đổi mật khẩu của bạn</p>';
+				$message .= '<p>Click vào link này để thay đổi mật khẩu mới: <a href=\'' . $url . '\'>Đổi mật khẩu</a></p>';
+
 				$mail = new PHPMailer();
-				$check = true;
 				try {
 					$mail->isSMTP();
 					$mail->Host = 'smtp.gmail.com';
 					$mail->SMTPAuth = 'true';
 					$mail->SMTPSecure = 'tls';
 					$mail->Port = '587';
-					$mail->Username = 'emailtestviet123@gmail.com';
-					$mail->Password = 'viet123456789';
+					$mail->Username = 'vietpthe150767@fpt.edu.vn';
+					$mail->Password = 'Viet07062001';
 					$mail->CharSet = 'UTF-8';
 
 					$mail->isHTML();
-					$mail->Subject = "Đổi mật khẩu";
+					$mail->Subject = $subject;
 					$mail->setFrom('vietpthe150767@fpt.edu.vn');
-					$mail->Body = 'Click vào link này để thay đổi mật khẩu của bạn: <a href="' . URLROOT . '/password/change_password">Đổi mật khẩu</a>
-					';
+					$mail->Body = $message;
 
 					$mail->addAddress($data['email']);
 					$check = $mail->send();
@@ -73,11 +96,14 @@ class Password extends Controller
 				} catch (Exception $e) {
 					echo $e->getMessage();
 				}
-
-				if ($check) {
-					header('Location: ' . URLROOT . '/authentication/login');
-				}
+			} else {
+				$response .= $data['email_error'] . '<br/>';
 			}
+
+			die(json_encode([
+				'check' => $check,
+				'msg' => $response
+			]));
 		}
 
 		$this->view('authentication/forgot.password', $data);
@@ -91,19 +117,24 @@ class Password extends Controller
 	public function change_password()
 	{
 		$data = [
+			'selector' => '',
+			'validator' => '',
 			'password' => '',
 			'confirm_password' => '',
 			'password_error' => '',
-			'confirm_pass_error' => ''
+			'confirm_pass_error' => '',
+			'error' => ''
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$email = $_SESSION['email'];
 			$data = [
-				'password' => $_POST['password'],
-				'confirm_password' => $_POST['confirm_password'],
+				'selector' => trim($_POST['selector']),
+				'validator' => trim($_POST['validator']),
+				'password' => trim($_POST['password']),
+				'confirm_password' => trim($_POST['confirm_password']),
 				'password_error' => '',
-				'confirm_pass_error' => ''
+				'confirm_pass_error' => '',
+				'error' => ''
 			];
 
 			if (empty($data['password'])) {
@@ -119,18 +150,52 @@ class Password extends Controller
 			}
 
 			if (empty($data['password_error']) && empty($data['confirm_pass_error'])) {
-				$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-				$user = $this->user_model->findUserByEmail($email);
-				$account = $this->account_model->getAccountByID($user->account_id);
-				if ($account) {
-					if ($this->account_model->changePassword($account->account_id, $data['password'])) {
-						unset($_SESSION['email']);
-						header('Location: ' . URLROOT . '/authentication/login');
+				$current_date = date('U');
+
+				$row = $this->reset_pass_model->checkExpire($data['selector'], $current_date);
+				if (!$row) {
+					$data['error'] = 'Xin lỗi, đường dẫn đã hết hiệu lực.';
+				} else {
+					$token_bin = hex2bin($data['validator']);
+					$token_check = password_verify($token_bin, $row->reset_token);
+
+					if (!$token_check) {
+						$data['error'] = 'Bạn cần gửi lại yêu cầu đổi mật khẩu.';
 					} else {
-						die('Something went wrong');
+						$token_email = $row->reset_email;
+						$user_row = $this->user_model->findUserByEmail($token_email);
+						if (!$user_row) {
+							$data['error'] = 'Có lỗi đã xảy ra';
+						} else {
+							$account = $this->account_model->getAccountByID($user_row->account_id);
+							$pass_hash = password_hash($data['password'], PASSWORD_DEFAULT);
+							$id = $account->account_id;
+							if (!$this->account_model->changePassword($id, $pass_hash)) {
+								$data['error'] = 'Có lỗi đã xảy ra';
+							}
+							if (!$this->reset_pass_model->deleteResetEmail($token_email)) {
+								$data['error'] = 'Có lỗi đã xảy ra';
+							}
+						}
 					}
 				}
 			}
+			$response_data_err = '';
+			$response_page_err = '';
+			if (!empty($data['password_error'])) {
+				$response_data_err .= $data['password_error'] . '<br/>';
+			} elseif (!empty($data['confirm_pass_error'])) {
+				$response_data_err .= $data['confirm_pass_error'] . '<br/>';
+			}
+
+			if (!empty($data['error'])) {
+				$response_page_err .= $data['error'] . '<br/>';
+			}
+
+			die(json_encode([
+				'data_err' => $response_data_err,
+				'page_err' => $response_page_err,
+			]));
 		}
 		$this->view('authentication/change.password', $data);
 	}

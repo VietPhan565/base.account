@@ -28,7 +28,7 @@ $(document).ready(function () {
                     if (data.msg_ok != '') {
                         // e.preventDefault();
                         $('#dialog-success').show()
-                        $('.err-success').html(data.msg_ok)
+                        $('.msg-success').html(data.msg_ok)
                     }
 
                     $('#button-click').click(function (e) {

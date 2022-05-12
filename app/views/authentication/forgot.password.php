@@ -24,11 +24,11 @@
 							sent to your email.
 						</div>
 
-						<form class="forgot-password" action="<?php echo URLROOT; ?>/password/forgot_password" method="POST">
+						<form class="forgot-password" method="POST">
 							<div class="row">
 								<div class="label">Email*</div>
 								<div class="input">
-									<input type="email" name="email" placeholder="Your email" />
+									<input type="text" name="email" placeholder="Your email" />
 								</div>
 								<!-- <div class="err">
 									<span class="input_err">
@@ -60,7 +60,7 @@
 
 	<?php require_once APPROOT . '/views/includes/footer.php'; ?>
 
-	<script src="<?php echo URLROOT; ?>/public/js/login.js"></script>
+	<script type="module" src="<?php echo URLROOT; ?>/public/js/forgot.password.js"></script>
 </body>
 
 </html>
