@@ -63,7 +63,6 @@ $(document).ready(function () {
             processData: false,
             dataType: "json",
             success: function (data) {
-                alert(data.msg)
                 let image_url = $('#avatar-user').attr('src');
                 $('#avatar-user').attr('src', image_url + '?time=' + $.now())
                 location.reload();
