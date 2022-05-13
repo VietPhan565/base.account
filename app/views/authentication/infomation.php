@@ -25,7 +25,17 @@
 			<div class="item">
 				<div class="image">
 					<div class="inner">
-						<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User icon" />
+						<?php
+						if (!empty($user->avatar)) {
+						?>
+							<img id="avatar-user" src="<?php echo URLROOT . '/public/src/' . $user->avatar; ?>">
+						<?php
+						} else {
+						?>
+							<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User icon" />
+						<?php
+						}
+						?>
 					</div>
 				</div>
 			</div>

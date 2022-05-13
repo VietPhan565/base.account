@@ -37,13 +37,13 @@ $(document).ready(function () {
             processData: false,
             dataType: "json",
             success: function (data) {
+                var image_url = $('#avatar-user').attr('src');
+                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
                 if (data.msg.trim() != '') {
                     $('#appdialog-error').show();
                     $('appdialog-error .err-message').html(data.msg)
                     return;
                 }
-                var image_url = $('#avatar-user').attr('src');
-                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
                 location.reload();
             }
         });
