@@ -1,40 +1,78 @@
 import { URLROOT } from './script.js';
 
-//Dialog for edit info
 $(document).ready(function () {
+
+    // Dialog for edit info
 
     $('#update-user-profile').click(function (e) {
         e.preventDefault();
         var fullname = $('input[name=fullname]').val();
         var position = $('#position').val();
-        // var img_url = $('')
-        // var dob = $('#dob_year').val() + '-' + $('#dob_month').val() + '-' + $('#dob_day').val();
+        var img_url = $('#avatar').get(0).files[0]
         var dob_year = $('#dob_year').val()
         var dob_month = $('#dob_month').val()
         var dob_day = $('#dob_day').val()
         var phone = $('#phone').val();
         var addr = $('#address').val();
-        if (fullname.trim() != '') {
-            $.ajax({
-                url: URLROOT + 'information/editinfo',
-                method: 'POST',
-                data: {
-                    fullname: fullname,
-                    position: position,
-                    dob: dob_year + '-' +dob_month + '-'+dob_day, 
-                    phone: phone, 
-                    address: addr
-                },
-                dataType: "json",
-                success: function (data) {
-                    location.reload();
-                }, error: function (data) {
-                }
-            });
-        } else {
+
+        var form_data = new FormData();
+        form_data.append('fullname', fullname)
+        form_data.append('position', position)
+        form_data.append('dob', dob_year + '-' + dob_month + '-' + dob_day)
+        form_data.append('image', img_url)
+        form_data.append('phone', phone)
+        form_data.append('address', addr)
+
+        if (!(fullname.trim() != '')) {
             $('#appdialog-error').show();
             $('#appdialog-error .err-message').html('Không được để trống tên')
+            return;
         }
+        $.ajax({
+            url: URLROOT + 'information/editinfo',
+            method: 'POST',
+            data: form_data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.msg.trim() != '') {
+                    $('#appdialog-error').show();
+                    $('appdialog-error .err-message').html(data.msg)
+                    return;
+                }
+                var image_url = $('#avatar-user').attr('src');
+                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
+                location.reload();
+            }
+        });
+    });
+
+    $('#user-avatar').change(function (e) {
+        e.preventDefault();
+        var file = this.files[0];
+        let form = new FormData();
+        form.append('image', file);
+        $.ajax({
+            url: URLROOT + 'information/upload_image',
+            type: 'POST',
+            data: form,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                alert(data.msg)
+                let image_url = $('#avatar-user').attr('src');
+                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
+                location.reload();
+
+            },
+            error: function () {
+                return alert('Nothing change! Please try again...');
+            }
+        });
     });
 
     $('#edit-user-info').click(function (e) {
@@ -56,10 +94,8 @@ $(document).ready(function () {
         e.preventDefault();
         $('#dialog').show();
     });
-});
 
-//Dialog for logout
-$(document).ready(function () {
+    //Dialog for logout
     $('.button.er.confirm-button').click(function (e) {
         e.preventDefault();
         $('#appdialog').hide();
@@ -85,39 +121,36 @@ $(document).ready(function () {
         e.preventDefault();
         $('#appdialog').hide();
     });
-});
 
-// Dialog for change password
-$(document).ready(function () {
-
+    // Dialog for change password
     $('#update-new-pass').click(function (e) {
         e.preventDefault();
         var old_password = $('#old_password').val();
         var new_password = $('#new_password').val();
         var confirm_new_password = $('#conf_new_password').val();
-        if (old_password.trim() != '' && new_password.trim() != ''
-            && confirm_new_password.trim() != '') {
-            $.ajax({
-                url: URLROOT + 'password/update_password',
-                method: "POST",
-                dataType: "json",
-                data: {
-                    old_password: old_password, new_password: new_password,
-                    conf_new_password: confirm_new_password
-                },
-                success: function (data) {
-                    if (data.msg != '') {
-                        $('#appdialog-error').show();
-                        $('#appdialog-error .err-message').html(data.msg)
-                        return;
-                    }
-                    location.reload();
-                }
-            });
-        } else {
+        if (!(old_password.trim() != '' && new_password.trim() != ''
+            && confirm_new_password.trim() != '')) {
             $('#appdialog-error').show();
             $('#appdialog-error .err-message').html('Thông tin không được để trống');
+            return;
         }
+        $.ajax({
+            url: URLROOT + 'password/update_password',
+            method: "POST",
+            dataType: "json",
+            data: {
+                old_password: old_password, new_password: new_password,
+                conf_new_password: confirm_new_password
+            },
+            success: function (data) {
+                if (data.msg != '') {
+                    $('#appdialog-error').show();
+                    $('#appdialog-error .err-message').html(data.msg)
+                    return;
+                }
+                location.reload();
+            }
+        });
     });
 
     $('#div-changepass').click(function (e) {
@@ -134,10 +167,8 @@ $(document).ready(function () {
         e.preventDefault();
         $('#changepass').hide();
     });
-});
 
-// Error dialog
-$(document).ready(function () {
+    // Error dialog
     $('#appdialog-error .dialog-close .icon-close').click(function (e) {
         e.preventDefault();
         $('#appdialog-error').hide();

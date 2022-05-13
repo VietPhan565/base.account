@@ -1,3 +1,4 @@
+<!-- Dialog for error message -->
 <div id="appdialog">
 		<div class="dialog-top">
 			<div class="dialog" style="top: 33%;left: 40%">
@@ -31,6 +32,7 @@
 		</div>
 </div>
 
+<!-- Dialog for success message -->
 <div id="dialog-success">
 		<div class="dialog-top">
 			<div class="dialog" style="top: 33%;left: 40%">

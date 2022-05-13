@@ -16,6 +16,7 @@
 		$validator = $_GET['validator'];
 		if (ctype_xdigit($selector) && ctype_xdigit($validator)) {
 	?>
+	<!-- Form change password - Forgot Password -->
 			<div id="master">
 				<div id="page">
 					<div class="auth">
@@ -31,14 +32,20 @@
 									<div class="row">
 										<div class="label">New password</div>
 										<div class="input">
-											<input type="password" name="password" placeholder="Your new password" />
+											<input type="password" id="password" name="password" placeholder="Your new password" />
+											<span toggle="#password" class="toggle-password">
+
+											</span>
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="label">Confirm password</div>
 										<div class="input">
-											<input type="password" name="confirm_password" placeholder="Your confirm password" />
+											<input type="password" id="confirm_password" name="confirm_password" placeholder="Your confirm password" />
+											<span toggle="#confirm_password" class="toggle-password">
+
+											</span>
 										</div>
 									</div>
 									<div class="row relative">

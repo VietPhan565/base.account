@@ -1,20 +1,12 @@
 <?php
-session_start();
 class Authentication extends Controller
 {
+
 	public function __construct()
 	{
+		$this->validation = $this->service('validation');
 		$this->user_model = $this->model('User');
 		$this->account_model = $this->model('Account');
-	}
-
-	public function index()
-	{
-		$data = [
-			'title' => 'Home page'
-		];
-
-		$this->view('index', $data);
 	}
 
 	/**
@@ -41,13 +33,14 @@ class Authentication extends Controller
 				'password_error' => ''
 			];
 
-			//Validate username 
+			// Validate username
 			if (empty($data['username'])) {
 				$data['username_error'] = 'Tài khoản không được để trống';
 			} elseif (!$this->account_model->getAccountByUser($data['username'])) {
 				$data['username_error'] = 'Tài khoản không tồn tại';
 			}
 
+			// Validate password
 			if (empty($data['password'])) {
 				$data['password_error'] = 'Mật khẩu không được để trống';
 			}
@@ -56,10 +49,8 @@ class Authentication extends Controller
 				$logged_in_user = $this->account_model->logIn($data['username'], $data['password']);
 				if ($logged_in_user) {
 					$this->createUserSession($logged_in_user);
-					// header('location: ' . URLROOT . '/information/userinfo');
 				} else {
 					$data['password_error'] = 'Thông tin không đúng, vui lòng nhập lại.';
-					// $this->view('authentication/login', $data);
 				}
 			}
 
@@ -69,10 +60,10 @@ class Authentication extends Controller
 			} elseif (!empty($data['password_error'])) {
 				$response .= $data['password_error'] . '<br/>';
 			}
-			die(json_encode([
+			$this->close([
 				'success' => false,
 				'msg' => $response,
-			]));
+			]);
 		}
 
 		$this->view('authentication/login', $data);
@@ -83,7 +74,7 @@ class Authentication extends Controller
 		unset($_SESSION['account_id']);
 		unset($_SESSION['username']);
 		session_destroy();
-		header('location: ' . URLROOT . '/authentication/login');
+		$this->redirect(URLROOT . '/authentication/login');
 	}
 
 	public function createUserSession($account)

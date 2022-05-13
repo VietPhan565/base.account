@@ -142,25 +142,3 @@
 ::-webkit-scrollbar {
     width: 10px;
 }
-
-.toggle-password::before {
-    font-family: "Material Icons";
-    content: "\e8f4";
-}
-
-.toggle-password {
-    float: right;
-    margin-top: -25px;
-    margin-right: 10px;
-}
-
-.toggle-password-invi::before {
-    font-family: "Material Icons";
-    content: "\e8f5";
-}
-
-.toggle-password-invi {
-    float: right;
-    margin-top: -25px;
-    margin-right: 10px;
-}

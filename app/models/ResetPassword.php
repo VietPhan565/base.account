@@ -9,7 +9,13 @@ class ResetPassword
     {
         $this->db = new Database;
     }
-
+    
+    /**
+     * deleteResetEmail
+     *
+     * @param  mixed $email
+     * @return true/false
+     */
     public function deleteResetEmail($email)
     {
         $this->db->query('DELETE FROM reset_password WHERE reset_email = :email');
@@ -21,7 +27,16 @@ class ResetPassword
             return false;
         }
     }
-
+    
+    /**
+     * insertToken
+     *
+     * @param  mixed $email
+     * @param  mixed $selector
+     * @param  mixed $token
+     * @param  mixed $expires
+     * @return true/false
+     */
     public function insertToken($email, $selector, $token, $expires)
     {
         $this->db->query('INSERT INTO reset_password (reset_email, reset_selector,
@@ -37,7 +52,14 @@ class ResetPassword
             return false;
         }
     }
-
+    
+    /**
+     * checkExpire
+     *
+     * @param  mixed $selector
+     * @param  mixed $current_date
+     * @return data/false
+     */
     public function checkExpire($selector, $current_date)
     {
         $this->db->query('SELECT * FROM reset_password WHERE reset_selector = :selector

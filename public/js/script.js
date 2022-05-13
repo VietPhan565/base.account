@@ -18,6 +18,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('#dialog-success').hide();
     })
+    
 });
 
 export const URLROOT = 'http://localhost/base.account/'

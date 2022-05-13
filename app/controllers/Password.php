@@ -1,12 +1,9 @@
 <?php
 
-session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
-require_once APPROOT . '/config/config.php';
 require_once APPROOT . '/plugins/PHPMailer/src/Exception.php';
 require_once APPROOT . '/plugins/PHPMailer/src/PHPMailer.php';
 require_once APPROOT . '/plugins/PHPMailer/src/SMTP.php';
@@ -20,6 +17,7 @@ class Password extends Controller
 		$this->user_model = $this->model('User');
 		$this->account_model = $this->model('Account');
 		$this->reset_pass_model = $this->model('ResetPassword');
+		$this->validation = $this->service('validation');
 	}
 
 	/**
@@ -31,25 +29,22 @@ class Password extends Controller
 	{
 		$data = [
 			'email' => '',
-			'email_error' => ''
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$data = [
 				'email' => trim($_POST['email']),
-				'email_error' => ''
 			];
-			$check = true;
 			$response = '';
-			if (empty($data['email'])) {
-				$data['email_error'] = 'Email không được để trống';
-			} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-				$data['email_error'] = 'Email không đúng format';
-			} elseif (!$this->user_model->findUserByEmail($data['email'])) {
-				$data['email_error'] = 'Email không tồn tại';
+			$validate_email = $this->validation->validateEmailExist($data['email']);
+			if ($validate_email != 'true') {
+				$this->close([
+					'success' => false,
+					'msg' => $validate_email
+				]);
 			}
 
-			if (empty($data['email_error'])) {
+			if ($validate_email) {
 
 				//Query user from the db
 				$selector = bin2hex(random_bytes(8));
@@ -61,13 +56,13 @@ class Password extends Controller
 
 				$expires = date('U') + 1800;
 				if (!$this->reset_pass_model->deleteResetEmail($data['email'])) {
-					die('Oops, có lỗi gì đó ở đây');
+					$this->close('Oops, có lỗi gì đó ở đây');
 				}
 
 				$hashed_token = password_hash($token, PASSWORD_DEFAULT);
 
 				if (!$this->reset_pass_model->insertToken($data['email'], $selector, $hashed_token, $expires)) {
-					die('Oops, có lỗi gì đó ở đây');
+					$this->close('Oops, có lỗi gì đó ở đây');
 				}
 
 				$subject = 'Thay đổi mật khẩu của bạn';
@@ -81,29 +76,25 @@ class Password extends Controller
 					$mail->SMTPAuth = 'true';
 					$mail->SMTPSecure = 'tls';
 					$mail->Port = '587';
-					$mail->Username = 'vietpthe150767@fpt.edu.vn';
-					$mail->Password = 'Viet07062001';
+					$mail->Username = 'emailtestviet123@gmail.com';
+					$mail->Password = 'viet123456789';
 					$mail->CharSet = 'UTF-8';
 
 					$mail->isHTML();
 					$mail->Subject = $subject;
-					$mail->setFrom('vietpthe150767@fpt.edu.vn');
+					$mail->setFrom('emailtestviet123@gmail.com');
 					$mail->Body = $message;
 
 					$mail->addAddress($data['email']);
-					$check = $mail->send();
+					$mail->send();
 					$mail->smtpClose();
 				} catch (Exception $e) {
 					echo $e->getMessage();
 				}
-			} else {
-				$response .= $data['email_error'] . '<br/>';
+				$this->close([
+					'msg' => ''
+				]);
 			}
-
-			die(json_encode([
-				'check' => $check,
-				'msg' => $response
-			]));
 		}
 
 		$this->view('authentication/forgot.password', $data);
@@ -137,67 +128,72 @@ class Password extends Controller
 				'error' => ''
 			];
 
-			if (empty($data['password'])) {
-				$data['password_error'] = 'Mật khẩu không được để trống';
-			} elseif (!preg_match(pass_validation, $data['password'])) {
-				$data['password_error'] = 'Mật khẩu phải chứa 1 kí tự in hoa, in thường, số và phải có độ dài 8 kí tự';
+			// Validate password
+			$validate_password = $this->validation->validatePassword($data['password']);
+			if ($validate_password != 'true') {
+				$this->close([
+					'data_err' => $validate_password
+				]);
 			}
 
-			if (empty($data['confirm_password'])) {
-				$data['confirm_pass_error'] = 'Mật khẩu xác nhận không được để trống';
-			} elseif (strcmp($data['password'], $data['confirm_password'])) {
-				$data['confirm_pass_error'] = 'Mật khẩu không đồng nhất';
+			// Validate confirm password
+			$validate_confirm_pass = $this->validation->validateConfirmPass($data['password'], $data['confirm_password']);
+			if ($validate_confirm_pass != 'true') {
+				$this->close([
+					'data_err' => $validate_confirm_pass
+				]);
 			}
 
-			if (empty($data['password_error']) && empty($data['confirm_pass_error'])) {
+			if ($validate_password && $validate_confirm_pass) {
 				$current_date = date('U');
 
 				$row = $this->reset_pass_model->checkExpire($data['selector'], $current_date);
+
 				if (!$row) {
 					$data['error'] = 'Xin lỗi, đường dẫn đã hết hiệu lực.';
-				} else {
-					$token_bin = hex2bin($data['validator']);
-					$token_check = password_verify($token_bin, $row->reset_token);
-
-					if (!$token_check) {
-						$data['error'] = 'Bạn cần gửi lại yêu cầu đổi mật khẩu.';
-					} else {
-						$token_email = $row->reset_email;
-						$user_row = $this->user_model->findUserByEmail($token_email);
-						if (!$user_row) {
-							$data['error'] = 'Có lỗi đã xảy ra';
-						} else {
-							$account = $this->account_model->getAccountByID($user_row->account_id);
-							$pass_hash = password_hash($data['password'], PASSWORD_DEFAULT);
-							$id = $account->account_id;
-							if (!$this->account_model->changePassword($id, $pass_hash)) {
-								$data['error'] = 'Có lỗi đã xảy ra';
-							}
-							if (!$this->reset_pass_model->deleteResetEmail($token_email)) {
-								$data['error'] = 'Có lỗi đã xảy ra';
-							}
-						}
-					}
+					$this->getJsonData($data);
 				}
-			}
-			$response_data_err = '';
-			$response_page_err = '';
-			if (!empty($data['password_error'])) {
-				$response_data_err .= $data['password_error'] . '<br/>';
-			} elseif (!empty($data['confirm_pass_error'])) {
-				$response_data_err .= $data['confirm_pass_error'] . '<br/>';
-			}
+				$token_bin = hex2bin($data['validator']);
+				$token_check = password_verify($token_bin, $row->reset_token);
 
-			if (!empty($data['error'])) {
-				$response_page_err .= $data['error'] . '<br/>';
+				if (!$token_check) {
+					$data['error'] = 'Bạn cần gửi lại yêu cầu đổi mật khẩu.';
+					$this->getJsonData($data);
+				}
+				$token_email = $row->reset_email;
+				$user_row = $this->user_model->findUserByEmail($token_email);
+				if (!$user_row) {
+					$data['error'] = 'Có lỗi đã xảy ra';
+					$this->getJsonData($data);
+				}
+				$account = $this->account_model->getAccountByID($user_row->account_id);
+				$pass_hash = password_hash($data['password'], PASSWORD_DEFAULT);
+				$id = $account->account_id;
+				if (!$this->account_model->changePassword($id, $pass_hash)) {
+					$data['error'] = 'Có lỗi đã xảy ra';
+					$this->getJsonData($data);
+				}
+				if (!$this->reset_pass_model->deleteResetEmail($token_email)) {
+					$data['error'] = 'Có lỗi đã xảy ra';
+					$this->getJsonData($data);
+				}
+				$this->close([
+					'data_err' => 'ok',
+					'page_err' => 'ok'
+				]);
 			}
-
-			die(json_encode([
-				'data_err' => $response_data_err,
-				'page_err' => $response_page_err,
-			]));
 		}
 		$this->view('authentication/change.password', $data);
+	}
+
+	public function getJsonData($data)
+	{
+		// if (!empty($data['error'])) {
+		$this->close([
+			'data_err' => '',
+			'page_err' => $data['error'] . '<br/>',
+		]);
+		// }
 	}
 
 	/**
@@ -269,10 +265,10 @@ class Password extends Controller
 				$response .= $data['conf_new_pass_error'] . '<br/>';
 			}
 
-			die(json_encode([
+			$this->close([
 				'success' => false,
 				'msg' => $response
-			]));
+			]);
 		}
 	}
 }

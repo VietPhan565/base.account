@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<!-- Form input email - Forgot password -->
 	<div id="master">
 		<div id="page">
 			<div class="auth">

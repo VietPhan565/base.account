@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<!-- Form register -->
 	<div id="master">
 		<div id="page">
 			<div class="auth">
@@ -29,11 +30,6 @@
 								<div class="input">
 									<input type="text" id="fullname" name="fullname" placeholder="Enter fullname" />
 								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['user_error'] ?>
-									</span>
-								</div> -->
 							</div>
 
 							<div class="row">
@@ -41,44 +37,30 @@
 								<div class="input">
 									<input type="text" id="username" name="username" placeholder="Enter username" />
 								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['user_error'] ?>
-									</span>
-								</div> -->
 							</div>
 							<div class="row">
 								<div class="label">Password</div>
 								<div class="input">
 									<input type="password" id="password" name="password" placeholder="Your password" />
-								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['pass_error'] ?>
+									<span toggle="#password" class="toggle-password">
+
 									</span>
-								</div> -->
+								</div>
 							</div>
 							<div class="row">
 								<div class="label">Confirm Password</div>
 								<div class="input">
 									<input type="password" id="confirm_pass" name="confirm_pass" placeholder="Your confirm password" />
-								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['confirm_pass_error'] ?>
+									<span toggle="#confirm_pass" class="toggle-password">
+
 									</span>
-								</div> -->
+								</div>
 							</div>
 							<div class="row">
 								<div class="label">Email</div>
 								<div class="input">
 									<input type="text" id="email" name="email" placeholder="Enter email" />
 								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['email_error'] ?>
-									</span>
-								</div> -->
 							</div>
 							<div class="row relative">
 								<button id="submit" type="submit" value="submit">Register</button>

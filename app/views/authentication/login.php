@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<!-- Form login -->
 	<div id="master">
 		<div id="page">
 			<div class="auth">
@@ -26,11 +27,6 @@
 								<div class="input">
 									<input type="text" id="username" name="username" placeholder="Your username" value="<?php echo $data['username']; ?>" />
 								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['username_error']; ?>
-									</span>
-								</div> -->
 							</div>
 							<div class="row">
 								<div class="label">
@@ -43,11 +39,6 @@
 
 									</span>
 								</div>
-								<!-- <div class="err">
-									<span class="invalid_res">
-										<?php echo $data['password_error']; ?>
-									</span>
-								</div> -->
 							</div>
 							<div class="row">
 								<input type="hidden" />
