@@ -42,8 +42,6 @@ $(document).ready(function () {
                     $('#appdialog-error .err-message').html(data.msg)
                     return;
                 }
-                var image_url = $('#avatar-user').attr('src');
-                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
                 location.reload();
             }
         });
@@ -63,8 +61,6 @@ $(document).ready(function () {
             processData: false,
             dataType: "json",
             success: function (data) {
-                let image_url = $('#avatar-user').attr('src');
-                $('#avatar-user').attr('src', image_url + '?time=' + $.now())
                 location.reload();
 
             },

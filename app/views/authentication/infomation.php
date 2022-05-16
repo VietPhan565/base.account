@@ -28,7 +28,7 @@
 						<?php
 						if (!empty($user->avatar)) {
 						?>
-							<img id="avatar-user" src="<?php echo URLROOT . '/public/src/' . $user->avatar; ?>">
+							<img id="avatar-user" src="<?php echo URLROOT . '/public/src/' . $user->avatar; ?>?nocache=<?php echo time(); ?>">
 						<?php
 						} else {
 						?>
@@ -307,7 +307,7 @@
 									<?php
 									if (!empty($user->avatar)) {
 									?>
-										<img id="avatar-user" src="<?php echo URLROOT . '/public/src/' . $user->avatar; ?>">
+										<img id="avatar-user-panel" src="<?php echo URLROOT . '/public/src/' . $user->avatar; ?>?nocache=<?php echo time(); ?>">
 									<?php
 									} else {
 									?>
