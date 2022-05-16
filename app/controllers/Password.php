@@ -178,8 +178,8 @@ class Password extends Controller
 					$this->getJsonData($data);
 				}
 				$this->close([
-					'data_err' => 'ok',
-					'page_err' => 'ok'
+					'data_err' => '',
+					'page_err' => ''
 				]);
 			}
 		}
